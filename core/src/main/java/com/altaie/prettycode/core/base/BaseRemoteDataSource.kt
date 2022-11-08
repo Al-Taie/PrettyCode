@@ -6,6 +6,8 @@ import com.altaie.prettycode.core.mapper.HttpExceptionMapper
 import com.altaie.prettycode.core.utils.extenstions.fromJson
 import com.altaie.prettycode.core.utils.extenstions.toJson
 import com.google.gson.Gson
+import okhttp3.internal.http1.Http1ExchangeCodec
+import org.apache.http.HttpStatus
 import retrofit2.HttpException
 import retrofit2.Response
 
@@ -26,9 +28,10 @@ interface BaseRemoteDataSource {
         result.body()?.run {
             Resource.Success(mapper(this))
         } ?: Resource.Empty
-    else if (result.code() == 422)
+    else if (result.code() == HttpStatus.SC_UNPROCESSABLE_ENTITY)
         runCatching {
-            Resource.Fail(result.errorBody()?.string().fromJson<ValidationException>())
+            val e = result.errorBody()?.string()
+            Resource.Fail(Gson().fromJson(e, ValidationException::class.java))
         }.onFailure {
             throw ResponseException(
                 message = result.errorBody()?.string().toString(),
