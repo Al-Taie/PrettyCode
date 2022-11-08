@@ -43,7 +43,7 @@ abstract class BaseUseCase<T> {
             emit(state)
         }
     }.onFailure { t ->
-        val errorMessage = when (t) {
+        val exception = when (t) {
             is IOException -> t.toNetworkError()
             is HttpException -> t.toHttpError()
             is ResponseException -> t.toResponseError()
@@ -54,7 +54,7 @@ abstract class BaseUseCase<T> {
         }
 
         onErrorState?.let { wrapper ->
-            emit(wrapper(errorMessage))
+            emit(wrapper(exception))
         }
     }
 
