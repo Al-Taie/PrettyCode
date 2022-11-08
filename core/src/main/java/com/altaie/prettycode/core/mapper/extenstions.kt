@@ -11,7 +11,7 @@ fun Error.toResource() = Resource.Fail(error = this)
 
 fun Throwable.toUnKnownError() = Error.UnknownError(message = message)
 
-fun IOException.toNetworkError() = Error.NetworkError()
+fun IOException.toNetworkError() = Error.NetworkError(message = message)
 
 fun HttpException.toHttpError() = Error.HttpError(message = message, code = code)
 
