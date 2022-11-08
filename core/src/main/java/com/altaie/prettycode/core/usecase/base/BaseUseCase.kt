@@ -3,6 +3,8 @@ package com.altaie.prettycode.core.usecase.base
 import com.altaie.prettycode.core.exceptions.GpsProviderIsDisabledException
 import com.altaie.prettycode.core.exceptions.HttpException
 import com.altaie.prettycode.core.exceptions.ResponseException
+import com.altaie.prettycode.core.exceptions.ValidationException
+import com.altaie.prettycode.core.exceptions.base.BaseException
 import com.altaie.prettycode.core.exceptions.base.Error
 import com.altaie.prettycode.core.mapper.toGpsError
 import com.altaie.prettycode.core.mapper.toHttpError
@@ -21,7 +23,7 @@ abstract class BaseUseCase<T> {
         onStartedState: T? = null,
         onEmptyState: T? = null,
         onSuccessState: ((returnType) -> T)? = null,
-        onErrorState: ((Error) -> T)? = null,
+        onErrorState: ((BaseException) -> T)? = null,
         suspendFunction: suspend () -> returnType
     ) = runCatching {
         withTimeout(timeoutMs) {
@@ -47,6 +49,7 @@ abstract class BaseUseCase<T> {
             is ResponseException -> t.toResponseError()
             is TimeoutCancellationException -> Error.TimeoutError()
             is GpsProviderIsDisabledException -> t.toGpsError()
+            is ValidationException -> t
             else -> throw t
         }
 

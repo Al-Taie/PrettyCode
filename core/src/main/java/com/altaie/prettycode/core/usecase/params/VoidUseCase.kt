@@ -1,4 +1,4 @@
-package com.gateway.core.usecase.params
+package com.altaie.prettycode.core.usecase.params
 
 import com.altaie.prettycode.core.base.Resource
 import com.altaie.prettycode.core.mapper.toResource
