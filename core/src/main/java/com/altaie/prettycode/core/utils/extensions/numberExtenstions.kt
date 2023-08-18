@@ -1,4 +1,4 @@
-package com.altaie.prettycode.core.utils.extenstions
+package com.altaie.prettycode.core.utils.extensions
 
 import kotlin.math.round
 

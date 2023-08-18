@@ -1,8 +1,8 @@
-package com.altaie.prettycode.core.utils.extenstions
+package com.altaie.prettycode.core.utils.extensions
 
-import com.altaie.prettycode.core.utils.extenstions.RegexPatterns.DIGITS
-import com.altaie.prettycode.core.utils.extenstions.RegexPatterns.EMAIL
-import com.altaie.prettycode.core.utils.extenstions.RegexPatterns.EMOJI
+import com.altaie.prettycode.core.utils.extensions.RegexPatterns.DIGITS
+import com.altaie.prettycode.core.utils.extensions.RegexPatterns.EMAIL
+import com.altaie.prettycode.core.utils.extensions.RegexPatterns.EMOJI
 
 val String.noWhitespace: String get() = filter { it.isWhitespace().not() }
 
