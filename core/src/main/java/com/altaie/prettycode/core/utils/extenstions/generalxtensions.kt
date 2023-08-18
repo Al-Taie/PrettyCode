@@ -1,11 +1,14 @@
 package com.altaie.prettycode.core.utils.extenstions
 
+import com.altaie.prettycode.core.base.Resource
+import com.altaie.prettycode.core.exceptions.EmptyBodyException
 import com.altaie.prettycode.core.exceptions.JsonSyntaxException
 import com.google.gson.Gson
 
+
 val gson: Gson by lazy { Gson() }
 
-inline fun <reified T> T?.toJson(): String = runCatching{
+inline fun <reified T> T?.toJson(): String = runCatching {
     gson.toJson(this)
 }.onFailure {
     throw JsonSyntaxException(
@@ -13,10 +16,12 @@ inline fun <reified T> T?.toJson(): String = runCatching{
     )
 }.getOrThrow()
 
-inline fun<reified T> String?.fromJson(): T = runCatching{
+inline fun <reified T> String?.fromJson(): T = runCatching {
     gson.fromJson(this, T::class.java)
 }.onFailure {
     throw JsonSyntaxException(
         message = "Filed to convert JsonString to ${T::class.simpleName}",
     )
 }.getOrThrow()
+
+fun <T> Resource<T>?.getOrThrowEmpty() = this?.toData ?: throw EmptyBodyException()

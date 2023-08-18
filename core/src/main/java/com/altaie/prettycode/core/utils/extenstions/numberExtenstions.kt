@@ -23,3 +23,23 @@ fun Double?.round(decimals: Int = 5): Double {
 }
 
 fun Float.isInRange(range: ClosedFloatingPointRange<Float>): Boolean = this in range
+
+fun Int?.orDash() = this?.toString() ?: "-"
+
+fun Long?.orDash() = this?.toString() ?: "-"
+
+fun Int?.orZero() = this ?: 0
+
+fun Int?.orDefault(value: Int = 0): Int {
+    if (this == null)
+        return value
+
+    return if (this == 0)
+        value
+    else if (this < value)
+        this
+    else
+        value
+}
+
+fun Long?.orZero() = this ?: 0

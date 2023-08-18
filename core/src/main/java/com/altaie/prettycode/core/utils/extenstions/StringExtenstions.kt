@@ -67,3 +67,11 @@ private object RegexPatterns {
     const val EMOJI = "\\p{So}"
     const val EMAIL = "[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}"
 }
+
+fun String?.orDash() = this ?: "-"
+
+fun String.toTitleCase(): String {
+    val titleCaseWords = split(" ")
+        .map { it.replaceFirstChar(Char::titlecase) }
+    return titleCaseWords.joinToString(" ")
+}
