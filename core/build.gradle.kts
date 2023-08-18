@@ -1,3 +1,5 @@
+import com.altaie.buildscr.Config.Version
+
 plugins {
     id ("java-library")
     id ("org.jetbrains.kotlin.jvm")
@@ -5,8 +7,8 @@ plugins {
 }
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
+    sourceCompatibility = Version.JVM
+    targetCompatibility = Version.JVM
 }
 
 dependencies {

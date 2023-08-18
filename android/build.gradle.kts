@@ -1,3 +1,5 @@
+import com.altaie.buildscr.Config
+
 plugins {
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.android.library)
@@ -25,18 +27,17 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = Config.Version.JVM
+        targetCompatibility = Config.Version.JVM
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = Config.Version.JVM.toString()
     }
 }
 
 dependencies {
 
     implementation(libs.androidx.core.ktx)
-    implementation(platform("org.jetbrains.kotlin:kotlin-bom:1.8.0"))
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
     testImplementation(libs.test.junit)
