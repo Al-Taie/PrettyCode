@@ -9,3 +9,5 @@ fun <T> List<T>.update(index: Int, value: T): List<T> =
 
 fun <T> List<T>.update(index: Int, value: T.() -> T): List<T> =
     toMutableList().apply { set(index, value(get(index))) }
+
+fun Result.Companion.empty() = success(null)
